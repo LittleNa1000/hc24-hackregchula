@@ -6,7 +6,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        chula: ["var(--chula-font)", ...fontFamily.sans],
+      },
+      colors: {
+        lightPink: "#FFE6F0",
+        pink: "#CD8EA6",
       },
     },
   },

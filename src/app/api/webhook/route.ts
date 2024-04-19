@@ -9,5 +9,6 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   console.log(body);
   await replyText(body.events[0].replyToken, "หวัดดีจ้า");
-  return new NextResponse("POST request to webhook");
+  const res = new NextResponse("POST request to webhook");
+  return res;
 }
