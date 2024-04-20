@@ -42,6 +42,10 @@ export type docImportantType = {
   zip: string | null;
   province: string | null;
   file: File | undefined;
+  paymentMethod: string | null;
+  creditCardNumber: string | null;
+  creditCardExpire: string | null;
+  creditCardCVC: string | null;
 };
 
 export const defaultDocImportant: docImportantType = {
@@ -52,4 +56,8 @@ export const defaultDocImportant: docImportantType = {
   zip: null,
   province: null,
   file: undefined,
+  paymentMethod: null,
+  creditCardNumber: null,
+  creditCardExpire: null,
+  creditCardCVC: null,
 };

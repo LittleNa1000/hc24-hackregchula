@@ -8,6 +8,7 @@ import { provinceOptions } from "@/utils/options";
 import Link from "next/link";
 import { PrimaryButton } from "./ui/button";
 import { useMemo } from "react";
+import Image from "next/image";
 
 export default function ImportantDocForm() {
   const [importantDoc, setImportantDoc] = useRecoilState(importantDocState);
@@ -118,6 +119,49 @@ export default function ImportantDocForm() {
                   });
               }}
             />
+            <label
+              htmlFor="dropzone-file"
+              className={`col-span-2 flex w-full flex-col items-center justify-center rounded-lg border-[1px] border-dashed bg-transparent lg:border-2 ${isDisabled ? "cursor-default opacity-60" : "cursor-pointer hover:opacity-80 active:opacity-60"}`}
+            >
+              <div className="flex flex-col items-center justify-center gap-2 p-3 lg:p-12">
+                <div className="mt-2 flex h-[24px] items-center justify-center">
+                  <Image
+                    src={"/icons/upload.svg"}
+                    width={24}
+                    height={24}
+                    alt="upload icon"
+                  />
+
+                  <span className="ml-[6px] text-sm text-slate-800 lg:text-[16px]">
+                    วางไฟล์ที่นี่
+                  </span>
+                </div>
+                <p className="mb-3 flex h-[32px] flex-wrap items-center justify-center gap-1 rounded-lg bg-slate-400 px-[15px] text-sm text-slate-50 lg:h-[40px]">
+                  <span className="text-sm lg:text-[16px]">
+                    กดเพื่ออัพโหลดไฟล์
+                  </span>
+                </p>
+                <p className="text-[12px] text-slate-400">(ไฟล์ .pdf)</p>
+              </div>
+              <input
+                id="dropzone-file"
+                type="file"
+                name="dropzone-file"
+                accept=".pdf, .jpg, .png"
+                onChange={(e) => {
+                  if (e.target.files)
+                    setImportantDoc({
+                      ...importantDoc,
+                      file: e.target.files[0],
+                    });
+                }}
+                onClick={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  target.value = "";
+                }}
+                className="hidden"
+              />
+            </label>
           </>
         )}
         {importantDoc.method === "postal" && (
@@ -160,13 +204,13 @@ export default function ImportantDocForm() {
             />
           </>
         )}
+        <Link
+          className="col-span-2 mx-auto mt-5"
+          href="/important-doc/checkout"
+        >
+          <PrimaryButton isDisabled={isDisabled}>Checkout</PrimaryButton>
+        </Link>
       </div>
-      <Link
-        className="absolute bottom-[95px] mx-auto"
-        href="/important-doc/checkout"
-      >
-        <PrimaryButton isDisabled={isDisabled}>Checkout</PrimaryButton>
-      </Link>
     </>
   );
 }

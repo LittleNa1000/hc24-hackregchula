@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`relative mx-auto min-h-screen w-full max-w-md overflow-hidden overscroll-none bg-white font-chula text-black ${chula.variable}`}
+        className={`relative mx-auto min-h-screen w-full max-w-md overflow-hidden overflow-y-scroll bg-white font-chula text-black ${chula.variable}`}
       >
         <RecoilRootProvider>
           <LiffProvider>{children}</LiffProvider>
