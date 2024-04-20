@@ -118,7 +118,6 @@ export default function RequestDocForm() {
             label="สถานภาพนิสิต"
             id="status"
             showLabel={true}
-            onChange={(e) => {}}
             isDisabled={true}
             options={[
               { value: request.status ?? "", label: request.status ?? "" },

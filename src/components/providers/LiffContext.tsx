@@ -25,7 +25,7 @@ export default function LiffProvider({
       .then((liff) => {
         console.log("LIFF init...");
         liff
-          .init({ liffId: env.NEXT_PUBLIC_LIFF_ID! })
+          .init({ liffId: env.NEXT_PUBLIC_LIFF_ID })
           .then(() => {
             console.log("LIFF init succeeded.");
             setLiffObject(liff);
@@ -34,6 +34,9 @@ export default function LiffProvider({
             console.log("LIFF init failed.");
             setLiffError(error.toString());
           });
+      })
+      .catch((error: Error) => {
+        console.log("LIFF import failed.");
       });
   }, []);
 

@@ -19,7 +19,7 @@ export function Dropdown({
   label: string;
   options: { value: string; label: string }[];
   id: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   isMulti?: boolean;
   showLabel?: boolean;
   isDisabled?: boolean;

@@ -6,7 +6,7 @@ import { Input } from "./ui/Input";
 import { redirect } from "next/navigation";
 
 export default function RegisterForm() {
-  if (localStorage.getItem("studentId")) {
+  if (typeof window !== "undefined" && localStorage.getItem("studentId")) {
     redirect("/request");
   }
   const [studentId, setStudentId] = useState<number | undefined>();

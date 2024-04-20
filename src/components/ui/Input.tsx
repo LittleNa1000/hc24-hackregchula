@@ -44,7 +44,7 @@ export function Input({
 export function FileInput({
   label,
   download,
-  onChange = () => {},
+  onChange,
   isDisabled = false,
 }: {
   label: string;
@@ -87,10 +87,10 @@ export function FileInput({
           name={label}
           accept=".pdf, .jpg, .png"
           onChange={(e) => {
-            if (e.target.files) {
+            if (e.target.files && onChange) {
               setFile(e.target.files[0]);
+              onChange(e);
             }
-            onChange(e);
           }}
           onClick={(e) => {
             const target = e.target as HTMLInputElement;
