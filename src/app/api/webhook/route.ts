@@ -1,8 +1,9 @@
+import { handleEvent } from "@/server/event";
 import { replyText } from "@/server/line";
 import {
   EventMessage,
   WebhookEvent,
-  UnsendEvent,
+  MessageEvent,
   WebhookRequestBody,
 } from "@line/bot-sdk";
 import { NextRequest, NextResponse } from "next/server";
@@ -16,11 +17,10 @@ export async function POST(request: NextRequest) {
   if (!body.events[0]) {
     return new NextResponse("No events");
   }
-  const event = body.events[0];
-  if (event.type !== "message") {
-    return new NextResponse("Not a message event");
-  }
-  await replyText(event.replyToken, "หวัดดีจ้า");
-  const res = new NextResponse("POST request to webhook");
-  return res;
+  body.events.forEach(async (event: WebhookEvent) => {
+    if (event.type === "message") {
+      await handleEvent(event);
+    }
+  });
+  return new NextResponse("POST request to webhook");
 }
