@@ -77,3 +77,38 @@ export function SuccessIcon({ className }: { className: string }) {
     </svg>
   );
 }
+
+export function WorldIcon({ className }: { className: string }) {
+  return (
+    <svg
+      width="50"
+      height="50"
+      viewBox="0 0 50 50"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M25 45.25C27.6593 45.25 30.2925 44.7262 32.7493 43.7086C35.2062 42.6909 37.4385 41.1993 39.3189 39.3189C41.1993 37.4385 42.6909 35.2062 43.7086 32.7493C44.7262 30.2925 45.25 27.6593 45.25 25C45.25 22.3407 44.7262 19.7075 43.7086 17.2507C42.6909 14.7938 41.1993 12.5615 39.3189 10.6811C37.4385 8.8007 35.2062 7.3091 32.7493 6.29144C30.2925 5.27378 27.6593 4.75 25 4.75C19.6294 4.75 14.4787 6.88348 10.6811 10.6811C6.88348 14.4787 4.75 19.6294 4.75 25C4.75 30.3706 6.88348 35.5213 10.6811 39.3189C14.4787 43.1165 19.6294 45.25 25 45.25Z"
+        stroke="#CD8EA6"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.75 25H45.25"
+        stroke="#CD8EA6"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M32.7895 25C32.4059 32.4052 29.6781 39.4967 25 45.25C20.3222 39.4966 17.5944 32.4051 17.2105 25C17.5944 17.5949 20.3222 10.5034 25 4.75C29.6781 10.5033 32.4059 17.5948 32.7895 25Z"
+        stroke="#CD8EA6"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

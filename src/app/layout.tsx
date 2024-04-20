@@ -22,7 +22,7 @@ const chula = localFont({
 export const metadata = {
   title: "New Reg Chula",
   description: "New Reg Chula by HackRegChula",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/reg-chula.webp" }],
 };
 
 export default function RootLayout({
