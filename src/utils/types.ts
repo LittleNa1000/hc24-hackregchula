@@ -20,6 +20,7 @@ export type docRequestType = {
   department: string | null;
   gpax: number | null;
   tel: string | null;
+  file: File | undefined;
 };
 
 export const defaultDocRequest: docRequestType = {
@@ -32,6 +33,7 @@ export const defaultDocRequest: docRequestType = {
   department: null,
   gpax: null,
   tel: null,
+  file: undefined,
 };
 
 export type docImportantType = {

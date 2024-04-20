@@ -1,146 +1,68 @@
 "use client";
 
-import { Dropdown } from "./ui/Dropdown";
 import Link from "next/link";
 import { PrimaryButton } from "./ui/button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { requestDocState, requestState } from "./providers/RecoilContext";
-import { useMemo } from "react";
-import { Input } from "./ui/Input";
-import { facultyOptions, semesterOptions } from "@/utils/options";
+import { useMemo, useState } from "react";
+import { FileInput } from "./ui/Input";
+import { documentMap } from "@/utils/options";
 
 export default function RequestDocSubmit() {
   const request = useRecoilValue(requestState);
   const [requestDoc, setRequestDoc] = useRecoilState(requestDocState);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const isDisabled = useMemo(() => {
-    return Object.values(requestDoc).some(
-      (value) => value === null || value === "",
-    );
-  }, [requestDoc]);
+    return !(requestDoc.file && isConfirmed);
+  }, [requestDoc, isConfirmed]);
 
   return (
     <>
-      <div className="my-2 flex w-full flex-col gap-3">
+      <div className="my-2 flex w-full flex-col gap-4">
         <div className="mb-2 rounded-3xl bg-pink px-3 pb-1 pt-2 text-xl text-white">
-          <span className=" underline">ประเภทคำร้อง</span>: {request.doc}
-          คำร้องขอถอนรายวิชาหลังกำหนด
+          <span className="underline">ประเภทคำร้อง</span>:
+          {documentMap[request.doc ?? "CR23"]?.name}
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          <Dropdown
-            label="คำนำหน้า"
-            id="title"
-            showLabel={true}
-            className="col-span-1"
+        <h3 className="text-2xl font-bold text-black">ขั้นตอนในการส่ง:</h3>
+        <ul className="flex list-decimal flex-col gap-2 px-6 text-xl text-black">
+          <li>ดาวน์โหลดเอกสาร</li>
+          <div className="px-5">
+            <Link href="/documents/CR41-template.pdf">
+              <FileInput label="ดาวน์โหลดเอกสาร" download />
+            </Link>
+          </div>
+          <li>ตรวจสอบเอกสารว่ามีข้อผิดพลาดหรือไม่</li>
+          <li>เซ็นชื่อ</li>
+          <li>อัพโหลดเอกสาร</li>
+        </ul>
+        <div className="mb-6 px-11">
+          <FileInput
+            label="อัพโหลดเอกสาร"
             onChange={(e) => {
-              setRequestDoc({ ...requestDoc, title: e.target.value });
-            }}
-            options={[
-              { value: "นาย", label: "นาย" },
-              { value: "นาง", label: "นาง" },
-              { value: "นางสาว", label: "นางสาว" },
-            ]}
-          />
-          <Input
-            label="ชื่อ"
-            type="text"
-            placeholder=""
-            showLabel={true}
-            id="firstName"
-            className="col-span-1 col-start-1"
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, firstName: e.target.value });
-            }}
-          />
-          <Input
-            label="นามสกุล"
-            type="text"
-            placeholder=""
-            showLabel={true}
-            id="lastName"
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, lastName: e.target.value });
-            }}
-          />
-          <Dropdown
-            label="ภาคการศึกษา"
-            id="semester"
-            showLabel={true}
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, semester: e.target.value });
-            }}
-            options={semesterOptions}
-          />
-          <Dropdown
-            label="ระบบการศึกษา"
-            id="educationType"
-            showLabel={true}
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, educationType: e.target.value });
-            }}
-            options={[
-              { value: "semester", label: "ทวีภาค" },
-              { value: "trimester", label: "ไตรภาค" },
-            ]}
-          />
-          <Dropdown
-            label="คณะ"
-            id="faculty"
-            showLabel={true}
-            className="col-span-2"
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, faculty: e.target.value });
-            }}
-            options={facultyOptions}
-          />
-          <Input
-            label="ภาควิชา/สาขาวิชา"
-            type="text"
-            placeholder=""
-            showLabel={true}
-            id="department"
-            onChange={(e) => {
-              setRequestDoc({ ...requestDoc, department: e.target.value });
-            }}
-          />
-          <Input
-            label="GPAX"
-            type="number"
-            placeholder=""
-            showLabel={true}
-            id="gpax"
-            onChange={(e) => {
-              setRequestDoc({
-                ...requestDoc,
-                gpax: parseFloat(e.target.value),
-              });
-            }}
-          />
-          <Dropdown
-            label="สถานภาพนิสิต"
-            id="status"
-            showLabel={true}
-            onChange={(e) => {}}
-            isDisabled={true}
-            options={[
-              { value: request.status ?? "", label: request.status ?? "" },
-            ]}
-          />
-          <Input
-            label="เบอร์โทรศัพท์"
-            type="tel"
-            placeholder=""
-            showLabel={true}
-            id="tel"
-            onChange={(e) => {
-              setRequestDoc({
-                ...requestDoc,
-                tel: e.target.value,
-              });
+              if (e.target.files)
+                setRequestDoc({
+                  ...requestDoc,
+                  file: e.target.files[0],
+                });
             }}
           />
         </div>
-        <Link className="mx-auto" href="/request-doc/submit">
-          <PrimaryButton isDisabled={isDisabled}>Proceed</PrimaryButton>
+        <div className="mx-auto flex justify-center gap-6">
+          <input
+            type="checkbox"
+            id="confirm"
+            name="confirm"
+            className="h-6 w-6 accent-pink"
+            onClick={(e) => {
+              setIsConfirmed(!isConfirmed);
+            }}
+          />
+          <label htmlFor="confirm" className="text-xl font-bold text-black">
+            ยืนยันว่าข้อมูลถูกต้อง
+          </label>
+        </div>
+        <Link className="mx-auto" href="/request-doc/success">
+          <PrimaryButton isDisabled={isDisabled}>Submit</PrimaryButton>
         </Link>
       </div>
     </>

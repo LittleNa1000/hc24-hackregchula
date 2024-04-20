@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { DownloadIcon, UploadIcon } from "./Icon";
 
 const inputClassName =
@@ -43,18 +44,19 @@ export function Input({
 export function FileInput({
   label,
   download,
-  onChange,
+  onChange = () => {},
   isDisabled = false,
 }: {
   label: string;
-  download: true;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  download?: true;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
 }) {
+  const [file, setFile] = useState<File | undefined>(undefined);
   return (
     <label
-      htmlFor="dropzone-file"
-      className={`border-gray col-span-2 flex w-full flex-col items-center justify-center rounded-lg border-[2px] bg-transparent lg:border-2 ${isDisabled ? "cursor-default opacity-60" : "cursor-pointer hover:opacity-80 active:opacity-60"}`}
+      htmlFor={label}
+      className={`border-gray col-span-2 flex w-full flex-col items-center justify-center rounded-2xl border-[2px] bg-transparent lg:border-2 ${isDisabled ? "cursor-default opacity-60" : "cursor-pointer hover:opacity-80 active:opacity-60"}`}
     >
       <div className="flex flex-col items-center justify-center gap-2 p-3 lg:p-12">
         <div className="mt-2 flex h-[24px] items-center justify-center">
@@ -65,19 +67,38 @@ export function FileInput({
         ) : (
           <UploadIcon className="h-6 w-6" />
         )}
+        {file && (
+          <div className="flex w-full justify-center rounded-md bg-slate-100 p-2">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-[12px] font-semibold text-slate-500">
+                {file.name}
+              </p>
+              <p className="text-[12px] text-slate-400">
+                {(file.size / 1024 / 1024).toFixed(1)} MB
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-      <input
-        id="dropzone-file"
-        type="file"
-        name="dropzone-file"
-        accept=".pdf, .jpg, .png"
-        onChange={onChange}
-        onClick={(e) => {
-          const target = e.target as HTMLInputElement;
-          target.value = "";
-        }}
-        className="hidden"
-      />
+      {!download && (
+        <input
+          id={label}
+          type="file"
+          name={label}
+          accept=".pdf, .jpg, .png"
+          onChange={(e) => {
+            if (e.target.files) {
+              setFile(e.target.files[0]);
+            }
+            onChange(e);
+          }}
+          onClick={(e) => {
+            const target = e.target as HTMLInputElement;
+            target.value = "";
+          }}
+          className="hidden"
+        />
+      )}
     </label>
   );
 }

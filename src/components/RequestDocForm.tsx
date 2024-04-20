@@ -22,7 +22,7 @@ export default function RequestDocForm() {
     <>
       <div className="my-2 flex w-full flex-col gap-3">
         <div className="mb-2 rounded-3xl bg-pink px-3 pb-1 pt-2 text-xl text-white">
-          <span className=" underline">ประเภทคำร้อง</span>:{" "}
+          <span className="underline">ประเภทคำร้อง</span>:{" "}
           {documentMap[request.doc ?? "CR23"]?.name}
         </div>
         <div className="grid grid-cols-2 gap-3">
