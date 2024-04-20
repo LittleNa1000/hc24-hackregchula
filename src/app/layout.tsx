@@ -1,6 +1,8 @@
-import LiffProvider from "@/components/LiffContext";
+import LiffProvider from "@/components/providers/LiffContext";
+import RecoilRootProvider from "@/components/providers/RecoilContext";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
+import { RecoilRoot } from "recoil";
 
 const chula = localFont({
   src: [
@@ -32,9 +34,11 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`relative mx-auto min-h-screen w-full max-w-md overflow-hidden overscroll-none font-chula ${chula.variable}`}
+        className={`relative mx-auto min-h-screen w-full max-w-md overflow-hidden overscroll-none bg-white font-chula text-black ${chula.variable}`}
       >
-        <LiffProvider>{children}</LiffProvider>
+        <RecoilRootProvider>
+          <LiffProvider>{children}</LiffProvider>
+        </RecoilRootProvider>
       </body>
     </html>
   );

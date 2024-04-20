@@ -1,4 +1,4 @@
-import { replyText } from "@/services/line";
+import { replyText } from "@/server/line";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

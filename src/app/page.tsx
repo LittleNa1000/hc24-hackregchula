@@ -1,4 +1,4 @@
-import { Heading } from "@/components/Typography";
+import { Heading } from "@/components/ui/Typography";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
