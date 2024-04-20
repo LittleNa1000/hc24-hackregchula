@@ -54,7 +54,7 @@ export default function DocRequest() {
               : requestDocOptions
           }
         />
-        <Link href="/info" className="ml-auto text-xl text-[#B0B0B0] underline">
+        <Link href="/info" className="text-gray ml-auto text-xl underline">
           ข้อมูลเพิ่มเติม
         </Link>
         <Link

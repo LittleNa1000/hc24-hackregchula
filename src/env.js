@@ -33,6 +33,7 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_LIFF_ID: z.string(),
+    NEXT_PUBLIC_RECIPIENT_NUMBER: z.string(),
   },
 
   /**
@@ -46,6 +47,7 @@ export const env = createEnv({
     LINE_CHANNEL_ACCESS_TOKEN: process.env.LINE_CHANNEL_ACCESS_TOKEN,
     LINE_CHANNEL_SECRET: process.env.LINE_CHANNEL_SECRET,
     NEXT_PUBLIC_LIFF_ID: process.env.NEXT_PUBLIC_LIFF_ID,
+    NEXT_PUBLIC_RECIPIENT_NUMBER: process.env.NEXT_PUBLIC_RECIPIENT_NUMBER,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

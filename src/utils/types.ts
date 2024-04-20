@@ -45,7 +45,7 @@ export type docImportantType = {
   paymentMethod: string | null;
   creditCardNumber: string | null;
   creditCardExpire: string | null;
-  creditCardCVC: string | null;
+  creditCardCVV: string | null;
 };
 
 export const defaultDocImportant: docImportantType = {
@@ -59,5 +59,5 @@ export const defaultDocImportant: docImportantType = {
   paymentMethod: null,
   creditCardNumber: null,
   creditCardExpire: null,
-  creditCardCVC: null,
+  creditCardCVV: null,
 };

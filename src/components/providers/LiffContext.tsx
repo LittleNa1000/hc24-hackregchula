@@ -1,4 +1,5 @@
 "use client";
+import { env } from "@/env";
 import { Liff } from "@line/liff";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -24,7 +25,7 @@ export default function LiffProvider({
       .then((liff) => {
         console.log("LIFF init...");
         liff
-          .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
+          .init({ liffId: env.NEXT_PUBLIC_LIFF_ID! })
           .then(() => {
             console.log("LIFF init succeeded.");
             setLiffObject(liff);

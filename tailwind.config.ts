@@ -11,6 +11,7 @@ export default {
       colors: {
         lightPink: "#FFE6F0",
         pink: "#CD8EA6",
+        gray: "#B0B0B0",
       },
     },
   },

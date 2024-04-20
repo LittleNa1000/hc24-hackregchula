@@ -1,6 +1,8 @@
 "use client";
 
-const optionClassName =
+import { DownloadIcon, UploadIcon } from "./Icon";
+
+const inputClassName =
   "text-black ring-2 ring-white w-full p-2 placeholder:text-gray-300 text-lg rounded-lg border border-slate-400";
 
 export function Input({
@@ -31,9 +33,51 @@ export function Input({
         type={type}
         placeholder={placeholder}
         id={id}
-        className={optionClassName}
+        className={inputClassName}
         onChange={onChange}
       />
     </div>
+  );
+}
+
+export function FileInput({
+  label,
+  download,
+  onChange,
+  isDisabled = false,
+}: {
+  label: string;
+  download: true;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isDisabled?: boolean;
+}) {
+  return (
+    <label
+      htmlFor="dropzone-file"
+      className={`border-gray col-span-2 flex w-full flex-col items-center justify-center rounded-lg border-[2px] bg-transparent lg:border-2 ${isDisabled ? "cursor-default opacity-60" : "cursor-pointer hover:opacity-80 active:opacity-60"}`}
+    >
+      <div className="flex flex-col items-center justify-center gap-2 p-3 lg:p-12">
+        <div className="mt-2 flex h-[24px] items-center justify-center">
+          <span className="text-xl font-bold text-pink">{label}</span>
+        </div>
+        {download ? (
+          <DownloadIcon className="h-6 w-6" />
+        ) : (
+          <UploadIcon className="h-6 w-6" />
+        )}
+      </div>
+      <input
+        id="dropzone-file"
+        type="file"
+        name="dropzone-file"
+        accept=".pdf, .jpg, .png"
+        onChange={onChange}
+        onClick={(e) => {
+          const target = e.target as HTMLInputElement;
+          target.value = "";
+        }}
+        className="hidden"
+      />
+    </label>
   );
 }

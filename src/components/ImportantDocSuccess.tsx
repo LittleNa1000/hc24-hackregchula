@@ -11,7 +11,7 @@ import generatePayload from "promptpay-qr";
 import { env } from "@/env";
 import QRCode from "react-qr-code";
 
-export default function ImportantDocCheckout() {
+export default function ImportantDocSuccess() {
   const [importantDoc, setImportantDoc] = useRecoilState(importantDocState);
   const [success, setSuccess] = useState(false);
   const isDisabled = useMemo(() => {
@@ -121,7 +121,7 @@ export default function ImportantDocCheckout() {
           </>
         )}
       </div>
-      <Link className="col-span-2 mx-auto mt-5" href="/important-doc/success">
+      <Link className="col-span-2 mx-auto mt-5" href="/important-doc/checkout">
         <PrimaryButton isDisabled={isDisabled}>
           {importantDoc.paymentMethod === "credit"
             ? "จ่ายเงิน"
