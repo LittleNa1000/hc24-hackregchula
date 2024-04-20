@@ -2,17 +2,16 @@ import LiffProvider from "@/components/providers/LiffContext";
 import RecoilRootProvider from "@/components/providers/RecoilContext";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
-import { RecoilRoot } from "recoil";
 
 const chula = localFont({
   src: [
     {
-      path: "../../public/fonts/CHULALONGKORNReg.otf",
+      path: "../../public/fonts/ChulaCharasNewReg.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/CHULALONGKORNBold.otf",
+      path: "../../public/fonts/ChulaCharasNewBold.ttf",
       weight: "700",
       style: "normal",
     },

@@ -8,7 +8,7 @@ import {
   typeOptions,
   requestDocOptions,
   importantDocOptions,
-} from "@/utils/types";
+} from "@/utils/options";
 import { useRecoilState } from "recoil";
 import { requestState } from "./providers/RecoilContext";
 import { useMemo } from "react";

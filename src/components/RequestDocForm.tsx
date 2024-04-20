@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { requestDocState, requestState } from "./providers/RecoilContext";
 import { useMemo } from "react";
 import { Input } from "./ui/Input";
-import { facultyOptions, semesterOptions } from "@/utils/types";
+import { documentMap, facultyOptions, semesterOptions } from "@/utils/options";
 
 export default function RequestDocForm() {
   const request = useRecoilValue(requestState);
@@ -22,15 +22,14 @@ export default function RequestDocForm() {
     <>
       <div className="my-2 flex w-full flex-col gap-3">
         <div className="mb-2 rounded-3xl bg-pink px-3 pb-1 pt-2 text-xl text-white">
-          <span className=" underline">ประเภทคำร้อง</span>: {request.doc}
-          คำร้องขอถอนรายวิชาหลังกำหนด
+          <span className=" underline">ประเภทคำร้อง</span>:{" "}
+          {documentMap[request.doc ?? "CR23"]?.name}
         </div>
         <div className="grid grid-cols-2 gap-3">
           <Dropdown
             label="คำนำหน้า"
             id="title"
             showLabel={true}
-            className="col-span-1"
             onChange={(e) => {
               setRequestDoc({ ...requestDoc, title: e.target.value });
             }}

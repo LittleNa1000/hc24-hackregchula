@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { requestDocState, requestState } from "./providers/RecoilContext";
 import { useMemo } from "react";
 import { Input } from "./ui/Input";
-import { facultyOptions, semesterOptions } from "@/utils/types";
+import { facultyOptions, semesterOptions } from "@/utils/options";
 
 export default function RequestDocSubmit() {
   const request = useRecoilValue(requestState);

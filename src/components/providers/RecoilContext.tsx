@@ -1,6 +1,10 @@
 "use client";
 
-import { defaultDocRequest, defaultRequest, requestType } from "@/utils/types";
+import {
+  defaultDocImportant,
+  defaultDocRequest,
+  defaultRequest,
+} from "@/utils/types";
 import { RecoilRoot, atom } from "recoil";
 
 // const localStorageEffect =
@@ -27,6 +31,12 @@ export const requestState = atom({
 export const requestDocState = atom({
   key: "requestDocState",
   default: defaultDocRequest,
+  effects: [],
+});
+
+export const importantDocState = atom({
+  key: "importantDocState",
+  default: defaultDocImportant,
   effects: [],
 });
 
