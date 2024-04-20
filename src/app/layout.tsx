@@ -1,3 +1,4 @@
+import LiffProvider from "@/components/LiffContext";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
 
@@ -31,9 +32,9 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`font-chula relative mx-auto min-h-screen w-full max-w-md overflow-hidden overscroll-none ${chula.variable}`}
+        className={`relative mx-auto min-h-screen w-full max-w-md overflow-hidden overscroll-none font-chula ${chula.variable}`}
       >
-        {children}
+        <LiffProvider>{children}</LiffProvider>
       </body>
     </html>
   );
