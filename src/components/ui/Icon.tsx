@@ -112,3 +112,45 @@ export function WorldIcon({ className }: { className: string }) {
     </svg>
   );
 }
+
+export function LeftIcon({ className }: { className: string }) {
+  return (
+    <svg
+      width="27"
+      height="17"
+      viewBox="0 0 27 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M2 2L13.125 14.573C13.1719 14.626 13.2296 14.6685 13.2941 14.6976C13.3587 14.7267 13.4287 14.7417 13.4995 14.7417C13.5703 14.7417 13.6403 14.7267 13.7049 14.6976C13.7694 14.6685 13.8271 14.626 13.874 14.573L25 2"
+        stroke="#CD8EA6"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function DownIcon({ className }: { className: string }) {
+  return (
+    <svg
+      width="27"
+      height="17"
+      viewBox="0 0 27 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className + " rotate-90 transform"}
+    >
+      <path
+        d="M2 2L13.125 14.573C13.1719 14.626 13.2296 14.6685 13.2941 14.6976C13.3587 14.7267 13.4287 14.7417 13.4995 14.7417C13.5703 14.7417 13.6403 14.7267 13.7049 14.6976C13.7694 14.6685 13.8271 14.626 13.874 14.573L25 2"
+        stroke="#CD8EA6"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
