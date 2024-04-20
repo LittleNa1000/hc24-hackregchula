@@ -3,7 +3,7 @@
 import Select from "node_modules/react-select/dist/declarations/src/Select";
 import { ActionMeta, MultiValue } from "react-select";
 
-const className =
+const optionClassName =
   "text-black ring-2 ring-white w-full p-2 placeholder:text-gray-300 text-lg rounded-lg border border-slate-400";
 
 export function Dropdown({
@@ -13,6 +13,8 @@ export function Dropdown({
   onChange,
   isMulti = false,
   showLabel = false,
+  isDisabled = false,
+  className,
 }: {
   label: string;
   options: { value: string; label: string }[];
@@ -20,26 +22,29 @@ export function Dropdown({
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   isMulti?: boolean;
   showLabel?: boolean;
+  isDisabled?: boolean;
+  className?: string;
 }) {
   return (
-    <div className="flex w-full flex-col items-start gap-2">
+    <div className={`flex w-full flex-col items-start gap-2 ${className}`}>
       {showLabel && (
-        <label className="text-md font-semibold" htmlFor={id}>
+        <label className="text-lg font-semibold text-black" htmlFor={id}>
           {label}
         </label>
       )}
 
       <select
+        disabled={isDisabled}
         id={id}
-        className={className}
+        className={optionClassName}
         onChange={onChange}
         // multiple={isMulti}
       >
         <option value="" selected disabled hidden>
-          {label}
+          {!showLabel ? label : ""}
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} selected={isDisabled}>
             {option.label}
           </option>
         ))}

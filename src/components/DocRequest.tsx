@@ -20,7 +20,6 @@ export default function DocRequest() {
     () => !(request.status && request.type && request.doc),
     [request],
   );
-  console.log(request);
 
   return (
     <>
