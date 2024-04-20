@@ -4,6 +4,7 @@ import { PrimaryButton } from "./ui/button";
 import { useMemo, useState } from "react";
 import { Input } from "./ui/Input";
 import { redirect } from "next/navigation";
+import { useLiff } from "./providers/LiffContext";
 
 export default function RegisterForm() {
   if (typeof window !== "undefined" && localStorage.getItem("studentId")) {
@@ -12,12 +13,18 @@ export default function RegisterForm() {
   const [studentId, setStudentId] = useState<number | undefined>();
   const [password, setPassword] = useState("");
   const [citizenId, setCitizenId] = useState("");
+  const liff = useLiff();
   const isDisabled = useMemo(() => {
     return !(studentId && password && citizenId);
   }, [studentId, password, citizenId]);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log({ studentId, password, citizenId });
-    if (isDisabled) return;
+
+    const profile = await liff?.getProfile().catch((error) => {
+      console.error(error);
+    });
+    if (isDisabled || !profile) return;
+    localStorage.setItem("lineUid", profile.userId);
     localStorage.setItem("studentId", studentId!.toString());
   };
   return (
