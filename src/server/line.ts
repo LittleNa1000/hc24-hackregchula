@@ -1,6 +1,7 @@
+"use server";
+
 import { env } from "@/env";
 import { FlexContainer, messagingApi } from "@line/bot-sdk";
-import { ErrorResponse } from "node_modules/@line/bot-sdk/dist/cjs/manage-audience/api";
 
 const client = new messagingApi.MessagingApiClient({
   channelAccessToken: env.LINE_CHANNEL_ACCESS_TOKEN,
@@ -17,8 +18,8 @@ export const replyText = async (replyToken: string, text: string) => {
         },
       ],
     })
-    .catch((e: ErrorResponse) => {
-      console.log(e.details);
+    .catch((e: string) => {
+      console.log(e);
       return null;
     });
   return sentMessages;
@@ -40,8 +41,8 @@ export const replyFlex = async (
         },
       ],
     })
-    .catch((e: ErrorResponse) => {
-      console.log(e.details);
+    .catch((e: string) => {
+      console.log(e);
       return null;
     });
   return sentMessages;
@@ -57,8 +58,8 @@ export const sentFlex = async (
       to: lineUid,
       messages: [{ type: "flex", altText, contents: flex }],
     })
-    .catch((e: ErrorResponse) => {
-      console.log(e.details);
+    .catch((e: string) => {
+      console.log(e);
       return null;
     });
   return sentMessages;
