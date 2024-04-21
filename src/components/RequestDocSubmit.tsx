@@ -62,7 +62,7 @@ export default function RequestDocSubmit() {
           </label>
         </div>
         <Link className="mx-auto" href="/request-doc/success">
-          <PrimaryButton isDisabled={isDisabled}>Submit</PrimaryButton>
+          <PrimaryButton isDisabled={!isConfirmed}>Submit</PrimaryButton>
         </Link>
       </div>
     </>
