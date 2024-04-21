@@ -79,7 +79,6 @@ export default function Info() {
         <Link className="col-span-2 mx-auto mt-5" href="/request">
           <PrimaryButton>กลับไปที่หน้าหลัก</PrimaryButton>
         </Link>
-        <SecondaryButton>ส่งข้อเสนอแนะ</SecondaryButton>
       </div>
     </>
   );

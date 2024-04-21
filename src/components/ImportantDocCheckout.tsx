@@ -1,7 +1,7 @@
 "use client";
 
 import { useRecoilState } from "recoil";
-import { importantDocState } from "./providers/RecoilContext";
+import { importantDocState, requestState } from "./providers/RecoilContext";
 import { Dropdown } from "./ui/Dropdown";
 import { Input } from "./ui/Input";
 import Link from "next/link";
@@ -15,6 +15,7 @@ import { confirmationFlex } from "@/flex-messages/confirmation";
 
 export default function ImportantDocCheckout() {
   const [importantDoc, setImportantDoc] = useRecoilState(importantDocState);
+  const [request, setRequest] = useRecoilState(requestState);
   const [success, setSuccess] = useState(false);
   const isDisabled = useMemo(() => {
     if (success) return false;
@@ -33,6 +34,7 @@ export default function ImportantDocCheckout() {
       }),
     [],
   );
+  const doc = request.doc ? request.doc : "จท23 (หนังสือรับรองความเป็นนิสิต)";
   const sent = async () => {
     if (typeof window !== "undefined") {
       const lineUid = localStorage.getItem("lineUid");
@@ -45,17 +47,17 @@ export default function ImportantDocCheckout() {
       <div className="flex w-full flex-col justify-start gap-1 px-5 text-black">
         <h3 className="text-3xl">Order Summary</h3>
         <div className="flex justify-between text-2xl">
-          <h4 className="font-bold">CR23</h4>
+          <h4 className="font-bold">{doc}</h4>
           {/* <div className="flex flex-grow overflow-hidden">
             ....................................................
           </div> */}
           <p>฿120</p>
         </div>
         <div className="mb-1 mt-2 border border-gray" />
-        <h5 className="text-right text-lg text-gray">Total: ฿360</h5>
+        <h5 className="text-right text-lg text-gray">Total: ฿120</h5>
         <h5 className="text-right text-lg text-gray">Mailing fee: ฿360</h5>
         <h5 className="text-right text-2xl font-bold text-pink">
-          Grand Total: ฿360
+          Grand Total: ฿120
         </h5>
       </div>
       <div className="mt-8 grid w-full grid-cols-2 gap-3 gap-x-10 px-5">
