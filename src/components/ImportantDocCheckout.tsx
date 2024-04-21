@@ -10,6 +10,8 @@ import { useMemo, useState } from "react";
 import generatePayload from "promptpay-qr";
 import { env } from "@/env";
 import QRCode from "react-qr-code";
+import { sentFlex } from "@/server/line";
+import { confirmationFlex } from "@/flex-messages/confirmation";
 
 export default function ImportantDocCheckout() {
   const [importantDoc, setImportantDoc] = useRecoilState(importantDocState);
@@ -31,6 +33,13 @@ export default function ImportantDocCheckout() {
       }),
     [],
   );
+  const sent = async () => {
+    if (typeof window !== "undefined") {
+      const lineUid = localStorage.getItem("lineUid");
+
+      if (lineUid) await sentFlex(lineUid, confirmationFlex, "confirmation");
+    }
+  };
   return (
     <>
       <div className="flex w-full flex-col justify-start gap-1 px-5 text-black">
@@ -42,9 +51,9 @@ export default function ImportantDocCheckout() {
           </div> */}
           <p>฿120</p>
         </div>
-        <div className="border-gray mb-1 mt-2 border" />
-        <h5 className="text-gray text-right text-lg">Total: ฿360</h5>
-        <h5 className="text-gray text-right text-lg">Mailing fee: ฿360</h5>
+        <div className="mb-1 mt-2 border border-gray" />
+        <h5 className="text-right text-lg text-gray">Total: ฿360</h5>
+        <h5 className="text-right text-lg text-gray">Mailing fee: ฿360</h5>
         <h5 className="text-right text-2xl font-bold text-pink">
           Grand Total: ฿360
         </h5>
@@ -122,7 +131,7 @@ export default function ImportantDocCheckout() {
         )}
       </div>
       <Link className="col-span-2 mx-auto mt-5" href="/important-doc/success">
-        <PrimaryButton isDisabled={isDisabled}>
+        <PrimaryButton isDisabled={isDisabled} onClick={sent}>
           {importantDoc.paymentMethod === "credit"
             ? "จ่ายเงิน"
             : "จ่ายเงินสำเร็จ"}

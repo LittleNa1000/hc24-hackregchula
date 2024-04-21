@@ -46,3 +46,20 @@ export const replyFlex = async (
     });
   return sentMessages;
 };
+
+export const sentFlex = async (
+  lineUid: string,
+  flex: FlexContainer,
+  altText: string,
+) => {
+  const sentMessages = await client
+    .pushMessage({
+      to: lineUid,
+      messages: [{ type: "flex", altText, contents: flex }],
+    })
+    .catch((e: ErrorResponse) => {
+      console.log(e.details);
+      return null;
+    });
+  return sentMessages;
+};
